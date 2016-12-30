@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TripListComponent } from './trip-list/trip-list.component';
 
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,
