@@ -1,3 +1,28 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <span>Car Share</span>
+   <!-- This fills the remaining space of the current row -->
+  <span style="flex: 1 1 auto;"></span>
+
+  <md-menu #appMenu="mdMenu">
+    <button md-menu-item> Settings </button>
+    <button md-menu-item> Help </button>
+  </md-menu>
+
+  <button md-icon-button [mdMenuTriggerFor]="appMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+</md-toolbar>
+
+<md-list>
+  <h3 md-subheader>Trips</h3>
+  <md-list-item *ngFor="let trip of trips">
+    <md-icon md-list-avatar>folder</md-icon>
+    <h4 md-line>{{folder.name}}</h4>
+    <p md-line> {{folder.updated | date}} </p>
+  </md-list-item>
+</md-list>
+
+<button md-mini-fab style=" position: absolute; right: 20px; bottom: 10px;">
+  <md-icon>add</md-icon>
+</button>
