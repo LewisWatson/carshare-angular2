@@ -1,0 +1,15 @@
+<md-toolbar color="primary">
+  <span>{{title}}</span>
+   <!-- This fills the remaining space of the current row -->
+  <span class="spacer"s></span>
+
+  <md-menu #appMenu="mdMenu">
+    <button md-menu-item> Settings </button>
+    <button md-menu-item> Help </button>
+  </md-menu>
+
+  <button md-icon-button [mdMenuTriggerFor]="appMenu">
+    <md-icon>more_vert</md-icon>
+  </button>
+
+</md-toolbar>
