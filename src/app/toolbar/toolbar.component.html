@@ -1,11 +1,14 @@
 <md-toolbar color="primary">
-  <span>{{title}}</span>
-   <!-- This fills the remaining space of the current row -->
-  <span class="spacer"s></span>
+  
+  <span class="spacer"></span>
+
+  <md-icon style="padding-right: 0.5em">directions_car</md-icon> {{title}}
+  
+  <span class="spacer"></span>
 
   <md-menu #appMenu="mdMenu">
-    <button md-menu-item> Settings </button>
-    <button md-menu-item> Help </button>
+    <button md-menu-item> Change Team </button>
+    <button md-menu-item> Log Out </button>
   </md-menu>
 
   <button md-icon-button [mdMenuTriggerFor]="appMenu">

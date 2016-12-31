@@ -1,11 +1,18 @@
-<md-list>
-  <h3 md-subheader>Trips</h3>
-  <md-list-item *ngFor="let trip of trips">
-    <md-icon md-list-avatar>folder</md-icon>
-    <h4 md-line>{{folder.name}}</h4>
-    <p md-line> {{folder.updated | date}} </p>
-  </md-list-item>
-</md-list>
+<md-card class="trip-card" *ngFor="let trip of trips">
+  <md-card-header>
+    <img md-card-avatar src="assets/img/avatar.jpg" alt="driver avatar"/>
+    <md-card-subtitle>Driver</md-card-subtitle>
+    <md-card-title>{{trip.driver.username}}</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <md-card-subtitle>Passengers</md-card-subtitle>
+    <md-grid-list cols="4" rowHeight="30px">
+      <md-grid-tile style="background-color: gray; color: white" *ngFor="let passenger of trip.passengers">
+        {{passenger.username}}
+      </md-grid-tile>
+    </md-grid-list>
+  </md-card-content>
+</md-card>
 
 <button md-fab class="fab">
   <md-icon>add</md-icon>

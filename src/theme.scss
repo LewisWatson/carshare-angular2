@@ -15,7 +15,7 @@ $car-share-app-accent:  md-palette($md-red, A200, A100, A400);
 $car-share-app-warn:    md-palette($md-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$car-share-app-theme: md-light-theme($car-share-app-primary, $car-share-app-accent, $car-share-app-warn);
+$car-share-app-theme: md-dark-theme($car-share-app-primary, $car-share-app-accent, $car-share-app-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
