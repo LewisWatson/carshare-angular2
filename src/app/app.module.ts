@@ -12,9 +12,11 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
+import { TripService } from './trip.service';
+
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TripListComponent } from './trip-list/trip-list.component';
-import { TripService } from './trip.service';
+import { TripDetailComponent } from './trip-detail/trip-detail.component';
 
 import 'hammerjs';
 
@@ -22,7 +24,8 @@ import 'hammerjs';
   declarations: [
     AppComponent,
     ToolbarComponent,
-    TripListComponent
+    TripListComponent,
+    TripDetailComponent
   ],
   imports: [
     BrowserModule,
