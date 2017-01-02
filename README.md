@@ -1,31 +1,22 @@
-# CarshareAngular2
+# Car Share Angular 2
+An HTML5 front end client for the [carshare-back api]. 
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
+Designed to enable easy tracking of the distance members travel as passengers and as drivers. Car share members can make informed day to day decisions about who should drive next based on the ratio of distance travelled as the driver vs as a passenger.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## License
 
-## Code scaffolding
+Copyright 2017 Lewis Watson
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-## Build
+   http://www.apache.org/licenses/LICENSE-2.0
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+[carshare-back api]: https://github.com/LewisWatson/carshare-back
