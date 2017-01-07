@@ -2,7 +2,7 @@
   <md-list class="carshare-card">
     <md-list-item item *ngFor="let carshare of carShares" (click)="onSelect(carshare)">
       <md-icon md-list-avatar>people</md-icon>
-      {{carshare.name}}
+      <h3 md-line> {{carshare.name}} </h3>
     </md-list-item>
   </md-list>
 </div>

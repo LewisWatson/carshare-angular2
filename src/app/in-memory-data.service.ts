@@ -7,7 +7,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 3, username: "Steve Smith"}
     ];
     let carShares = [
-      {id: 1, name: "Awesome Blazers Car Share Club"}
+      {id: 1, name: "Awesome Blazers Car Share Club"},
+      {id: 2, name: "Initech Commuters"},
+      {id: 3, name: "The Panther Claws"}
     ];
     let trips = [
       {id: 11, carShare: carShares[0], driver: users[0], passengers: [ users[0], users[1] ] },

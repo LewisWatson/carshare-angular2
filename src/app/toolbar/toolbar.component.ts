@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router }   from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,10 +11,16 @@ export class ToolbarComponent implements OnInit {
 
   title = 'Car Share';
 
-  constructor(private titleService: Title) {}
+  constructor(
+    private titleService: Title,
+    private router: Router) {}
 
   ngOnInit() {
     this.title = this.titleService.getTitle();
+  }
+
+  changeTeam(): void {
+    this.router.navigate(['/carshares']);
   }
 
 }
