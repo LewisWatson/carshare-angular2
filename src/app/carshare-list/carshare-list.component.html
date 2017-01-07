@@ -1,0 +1,12 @@
+<div style="height:900px; overflow: auto">
+  <md-list class="carshare-card">
+    <md-list-item item *ngFor="let carshare of carShares" (click)="onSelect(carshare)">
+      <md-icon md-list-avatar>people</md-icon>
+      {{carshare.name}}
+    </md-list-item>
+  </md-list>
+</div>
+
+<button md-fab class="fab" (click)="newCarShare()">
+  <md-icon>group_add</md-icon>
+</button>

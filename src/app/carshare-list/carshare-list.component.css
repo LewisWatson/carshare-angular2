@@ -1,0 +1,11 @@
+.carShare-card {
+  max-width: 800px;
+  margin: auto;
+}
+
+.fab {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: white
+}
