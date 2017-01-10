@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, Params }   from '@angular/router';
 
@@ -17,7 +17,7 @@ import { TripService } from '../trip.service';
 })
 export class TripListComponent implements OnInit {
 
-  @Input() carShare: CarShare;
+  carShare: CarShare;
 
   trips: Trip[];
 
@@ -28,17 +28,16 @@ export class TripListComponent implements OnInit {
     private carshareService: CarShareService,
     private tripService: TripService) { }
 
-  getTrips(): void {
-    this.tripService.getTrips().then(trips => this.trips = trips);
-  }
-
   ngOnInit() {
     this.titleService.setTitle("Trips");
     this.route.params
       .switchMap((params: Params) => this.carshareService.getCarShare(+params['id']))
       .subscribe(carShare => this.carShare = carShare);
-
     this.getTrips();
+  }
+
+  getTrips(): void {
+    this.tripService.getTrips().then(trips => this.trips = trips);
   }
 
   onSelect(trip: Trip): void {

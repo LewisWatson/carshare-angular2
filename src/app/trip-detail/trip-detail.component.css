@@ -1,0 +1,15 @@
+.trip-form {
+  max-width: 800px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+.error {
+  color: red;
+  font-style: bold;
+}

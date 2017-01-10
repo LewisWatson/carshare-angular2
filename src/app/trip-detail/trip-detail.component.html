@@ -1,3 +1,50 @@
-<p>
-  trip-detail works!
-</p>
+<div class="trip-form">
+  <md-card class="trip-card">
+    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+      <md-card-header>
+        <md-card-subtitle>{{carShare?.name}}</md-card-subtitle>
+        <md-card-title>{{form.get("id").value ? "Existing Trip":"New Trip"}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <md-input-container>
+          <input md-input formControlName="metres" type="number" placeholder="Distance (metres)">
+        </md-input-container>
+        <div class="error" *ngIf="form.get('metres').hasError('required') && form.get('metres').touched">
+          Distance is required
+        </div>
+        <p>
+        <md-input-container>
+          <input md-input formControlName="timestamp" placeholder="Timestamp">
+        </md-input-container>
+        <div class="error" *ngIf="form.get('timestamp').hasError('required') && form.get('timestamp').touched">
+          Timestamp is required
+        </div>
+        <p>
+        <md-select formControlName="driver" placeholder="Driver">
+          <md-option *ngFor="let member of carShare?.members" [value]="member">
+            {{member.username}}
+          </md-option>
+        </md-select>
+        <div class="error" *ngIf="form.get('driver').hasError('required') && form.get('driver').touched">
+          Driver is required
+        </div>
+        <p>
+        Passengers
+        <md-list class="carshare-card">
+          <md-list-item item *ngFor="let passenger of trip?.passengers">
+            <md-icon md-list-avatar>people</md-icon>
+            <h3 md-line> {{passenger.username}} </h3>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+      <md-icon  mdTooltip="Add passenger to trip">group_add</md-icon>
+      <md-card-actions>
+        <button md-button type="submit" [disabled]="form.invalid">save</button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>
+<!--<md-card>
+  <p>Form: {{ form.value | json }}</p>
+  <p>Form status: {{ form.status }}</p>
+</md-card>-->

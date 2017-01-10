@@ -37,9 +37,9 @@ export class TripService {
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<Trip> {
+  create(trip: Trip): Promise<Trip> {
     return this.http
-      .post(this.tripsUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.tripsUrl, JSON.stringify(trip), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
