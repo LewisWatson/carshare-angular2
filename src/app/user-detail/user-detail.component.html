@@ -1,0 +1,25 @@
+<div class="user-form">
+  <md-card class="user-card">
+    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+      <md-card-header>
+        <md-card-subtitle>{{carshare?.name}}</md-card-subtitle>
+        <md-card-title>{{form.get("id").value ? "Existing User":"New User"}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <md-input-container>
+          <input md-input formControlName="username" placeholder="user name">
+        </md-input-container>
+        <div class="error" *ngIf="form.get('username').hasError('required') && form.get('username').touched">
+          A user name is required
+        </div>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button type="submit" [disabled]="form.invalid">save</button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>
+<!--<md-card>
+  <p>Form: {{ form.value | json }}</p>
+  <p>Form status: {{ form.status }}</p>
+</md-card>-->

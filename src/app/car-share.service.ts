@@ -30,6 +30,7 @@ export class CarShareService {
 
   update(carShare: CarShare): Promise<CarShare> {
     const url = `${this.carSharesUrl}/${carShare.id}`;
+    console.log("Updating car share " + url + " with "+JSON.stringify(carShare));
     return this.http
       .put(url, JSON.stringify(carShare), {headers: this.headers})
       .toPromise()
@@ -37,9 +38,9 @@ export class CarShareService {
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<CarShare> {
+  create(carShare: CarShare): Promise<CarShare> {
     return this.http
-      .post(this.carSharesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.carSharesUrl, JSON.stringify(carShare), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);

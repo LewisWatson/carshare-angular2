@@ -14,6 +14,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
 import { AppComponent } from './app.component';
 import { TripService } from './trip.service';
 import { CarShareService } from './car-share.service';
+import { UserService } from './user.service';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TripListComponent } from './trip-list/trip-list.component';
@@ -22,6 +23,7 @@ import { TripDetailComponent } from './trip-detail/trip-detail.component';
 import 'hammerjs';
 import { CarshareListComponent } from './carshare-list/carshare-list.component';
 import { CarshareDetailComponent } from './carshare-detail/carshare-detail.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { CarshareDetailComponent } from './carshare-detail/carshare-detail.compo
     TripListComponent,
     TripDetailComponent,
     CarshareListComponent,
-    CarshareDetailComponent
+    CarshareDetailComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { CarshareDetailComponent } from './carshare-detail/carshare-detail.compo
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
-  providers: [CarShareService, TripService],
+  providers: [CarShareService, TripService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

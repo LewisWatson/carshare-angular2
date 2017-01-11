@@ -4,6 +4,7 @@ import { CarshareListComponent }   from '../carshare-list/carshare-list.componen
 import { CarshareDetailComponent }   from '../carshare-detail/carshare-detail.component';
 import { TripListComponent }   from '../trip-list/trip-list.component';
 import { TripDetailComponent } from '../trip-detail/trip-detail.component';
+import { UserDetailComponent } from '../user-detail/user-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/carshares', pathMatch: 'full' },
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'carshare/new', component: CarshareDetailComponent },
   { path: 'carshare/:id/trips', component: TripListComponent },
   { path: 'carshare/:id/trip/new', component: TripDetailComponent },
-  { path: 'carshare/:id/trip/:tripId', component: TripDetailComponent }
+  { path: 'carshare/:id/trip/:tripId', component: TripDetailComponent },
+  { path: 'carshare/:id/trip/:tripId/passenger/new', component: UserDetailComponent }
 ];
 
 @NgModule({

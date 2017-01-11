@@ -1,3 +1,33 @@
-<p>
-  carshare-detail works!
-</p>
+<div class="car-share-form">
+  <md-card class="car-share-card">
+    <form novalidate (ngSubmit)="onSubmit(form)" [formGroup]="form">
+      <md-card-header>
+        <md-card-title>{{form.get("id").value ? "Existing Car Share":"New Car Share"}}</md-card-title>
+      </md-card-header>
+      <md-card-content>
+        <md-input-container>
+          <input md-input formControlName="name" placeholder="Name">
+        </md-input-container>
+        <div class="error" *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+          A name is required
+        </div>
+        <p>
+        Members
+        <md-list class="car-share-card">
+          <md-list-item item *ngFor="let member of carShare?.members">
+            <md-icon md-list-avatar>people</md-icon>
+            <h3 md-line> {{member.username}} </h3>
+          </md-list-item>
+        </md-list>
+      </md-card-content>
+      <md-icon  mdTooltip="Add member to car share">group_add</md-icon>
+      <md-card-actions>
+        <button md-button type="submit" [disabled]="form.invalid">save</button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>
+<!--<md-card>
+  <p>Form: {{ form.value | json }}</p>
+  <p>Form status: {{ form.status }}</p>
+</md-card>-->

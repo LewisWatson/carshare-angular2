@@ -14,7 +14,7 @@
         </div>
         <p>
         <md-input-container>
-          <input md-input formControlName="timestamp" placeholder="Timestamp">
+          <input md-input formControlName="timestamp" type="date" placeholder="Timestamp">
         </md-input-container>
         <div class="error" *ngIf="form.get('timestamp').hasError('required') && form.get('timestamp').touched">
           Timestamp is required
@@ -37,7 +37,7 @@
           </md-list-item>
         </md-list>
       </md-card-content>
-      <md-icon  mdTooltip="Add passenger to trip">group_add</md-icon>
+      <md-icon  mdTooltip="Add passenger to trip" (click)="addMember()">group_add</md-icon>
       <md-card-actions>
         <button md-button type="submit" [disabled]="form.invalid">save</button>
       </md-card-actions>
