@@ -38,12 +38,12 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('User');
-    this.route.params
-      .switchMap((params: Params) => this.carShareService.getCarShare(params['id']))
-      .subscribe((carShare: CarShare) => this.carShare = carShare);
-    this.route.params
-      .switchMap((params: Params) => this.tripService.getTrip(params['tripId']))
-      .subscribe((trip: Trip) => this.trip = trip);
+    // this.route.params
+    //   .switchMap((params: Params) => this.carShareService.getCarShare(params['id']))
+    //   .subscribe((carShare: CarShare) => this.carShare = carShare);
+    // this.route.params
+    //   .switchMap((params: Params) => this.tripService.getTrip(params['tripId']))
+    //   .subscribe((trip: Trip) => this.trip = trip);
     // this.route.params
     //   .switchMap((params: Params) => this.userService.getUser(params['userId']))
     //   .subscribe((user: User) => this.updateForm(user));
@@ -60,7 +60,7 @@ export class UserDetailComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     console.log(form);
-    var user = new User();
+    var user: User;
     user.username = form.get('username').value;
     this.userService.create(user).then((user: User) => this.addUserToMembers(user));
   }

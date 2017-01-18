@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router }   from '@angular/router';
 import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
+import { DataStoreService } from '../data-store.service';
 
 @Component({
   selector: 'app-carshare-list',
@@ -15,8 +15,8 @@ export class CarshareListComponent implements OnInit {
   
   constructor(
     private titleService: Title,
-    private router: Router, 
-    private carShareService: CarShareService) { }
+    private router: Router,
+    private dataStoreService: DataStoreService) { }
 
   ngOnInit() {
     this.getCarShares();
@@ -24,7 +24,13 @@ export class CarshareListComponent implements OnInit {
   }
 
   getCarShares(): void {
-    this.carShareService.getCarShares().then(carShares => this.carShares = carShares);
+    this.dataStoreService.query(CarShare, {}).subscribe(
+        (carShares: CarShare[]) => this.setCarShares(carShares)
+    );
+  }
+
+  setCarShares(carShares: CarShare[]) {
+    this.carShares = carShares;
   }
 
   onSelect(carShare: CarShare): void {

@@ -1,7 +1,20 @@
-import { User } from './user';
+import { JsonApiModelConfig, JsonApiModel, Attribute, BelongsTo, HasMany } from 'angular2-jsonapi';
 
-export class CarShare {
+import { User } from './user';
+import { Trip } from './trip';
+
+@JsonApiModelConfig({
+    type: 'carShares'
+})
+export class CarShare extends JsonApiModel {
     id: string;
+    
+    @Attribute()
     name: string;
+
+    @HasMany()
     members: User[];
+
+    @HasMany()
+    trips: Trip[];
 }

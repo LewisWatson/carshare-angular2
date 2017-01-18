@@ -5,6 +5,7 @@ import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { CarShare } from '../car-share';
 import { CarShareService } from '../car-share.service';
+import { DataStoreService } from '../data-store.service';
 
 @Component({
   selector: 'app-carshare-detail',
@@ -21,7 +22,8 @@ export class CarshareDetailComponent implements OnInit {
     private titleService: Title, 
     public fb: FormBuilder, 
     private route: ActivatedRoute,
-    private location: Location) {
+    private location: Location,
+    private dataStoreService: DataStoreService) {
     this.form = this.fb.group({
       id: '',
       name: ['', Validators.required],
@@ -47,13 +49,12 @@ export class CarshareDetailComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    console.log(form);
-
-    var carShare = new CarShare();
-    carShare.name = form.get('name').value;
-    carShare.members = form.get('members').value;
-
-    this.carShareService.create(carShare).then(() => this.goBack());
+    this.dataStoreService.createRecord(CarShare, {
+        name: form.get('name').value
+        // members: form.get('members').value``
+    }).save().subscribe(
+      (carShare: CarShare) => this.goBack()
+    );
   }
 
   goBack(): void {

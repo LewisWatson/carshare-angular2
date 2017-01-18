@@ -1,7 +1,18 @@
+import { JsonApiModelConfig, JsonApiModel, Attribute, BelongsTo } from 'angular2-jsonapi';
+
 import { User }     from './user';
 
-export class Score {
+@JsonApiModelConfig({
+    type: 'scores'
+})
+export class Score  extends JsonApiModel {
+
+    @BelongsTo()
     user: User;
+
+    @Attribute()
     metresAsDriver: number;
+
+    @Attribute()
     metresAsPassenger: number;
 }

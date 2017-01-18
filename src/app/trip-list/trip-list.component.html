@@ -1,5 +1,5 @@
 <div style="height:900px; overflow: auto">
-  <md-card class="trip-card" *ngFor="let trip of trips" (click)="onSelect(trip)">
+  <md-card class="trip-card" *ngFor="let trip of carShare?.trips" (click)="onSelect(trip)">
     <md-card-header>
       <md-icon md-card-avatar class="driver-avatar">account_circle</md-icon>
       <md-card-subtitle>Driver</md-card-subtitle>
@@ -8,7 +8,7 @@
     <md-card-content>
       <md-card-subtitle>Passengers</md-card-subtitle>
       <!--<md-grid-list cols="4" rowHeight="30px">-->
-        <span class="passenger" *ngFor="let passenger of trip.passengers">
+        <span class="passenger" *ngFor="let passenger of trip?.passengers">
           <md-icon class="passenger-avatar">account_circle</md-icon> {{passenger.username}}
         </span>
       <!--</md-grid-list>-->
