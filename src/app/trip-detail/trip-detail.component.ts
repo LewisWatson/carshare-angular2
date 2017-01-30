@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params, Router }   from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ErrorResponse } from "angular2-jsonapi";
+
 import { Trip } from '../trip';
+import { User } from '../user';
 import { CarShare } from '../car-share';
 import { DataStoreService } from '../data-store.service';
 
@@ -21,8 +24,8 @@ export class TripDetailComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private titleService: Title, 
-    public fb: FormBuilder, 
+    private titleService: Title,
+    public fb: FormBuilder,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
@@ -43,43 +46,65 @@ export class TripDetailComponent implements OnInit {
       .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['id']))
       .subscribe((carShare: CarShare) => this.carShare = carShare);
 
-    // this.route.params
-    //   .switchMap((params: Params) => this.dataStoreService.findRecord(Trip, params['tripId']))
-    //   .subscribe((trip: Trip) => this.updateForm(trip));
+    this.route.params
+      .map(params => params['tripId'])
+      .subscribe(
+        tripId => this.loadTrip(tripId),
+        err => console.log(`Something went wrong: ${err.message}`)
+      );
   }
 
-  // updateForm(trip: Trip) {
-  //   console.log("updating from with trip "+ JSON.stringify(trip));
-  //   this.trip = trip;
-  //   this.form.patchValue({
-  //     id: trip.id,
-  //     metres: trip.metres,
-  //     timestamp: trip.timestamp,
-  //     driver: trip.driver,
-  //     passengers: trip.passengers
-  //   })
-  // }
-
-  onSubmit(form: FormGroup) {
-    // console.log(form);
-    this.dataStoreService.createRecord(Trip, {
-        metres: 123 //form.get('metres').value
-        // timestamp: form.get('timestamp').value
-        // driver: form.get('driver').value
-    }).save().subscribe(
-      (trip: Trip) => this.addTripToCarShare(trip)
-    );
+  loadTrip(tripId: string) {
+    if (tripId) {
+      this.route.params
+        .switchMap((params: Params) => this.dataStoreService.findRecord(Trip, params['tripId']))
+        .subscribe((trip: Trip) => this.updateForm(trip));
+    }
   }
 
-  addTripToCarShare(trip: Trip) {
-    console.log("adding trip to car share");
+  initialisCarShare(carshare: CarShare) {
+    this.carShare = carshare;
 
-    if(!this.carShare.trips) {
+    if (!this.carShare.trips) {
+      console.log("trip array undefined so initialising");
       this.carShare.trips = new Array();
     }
 
-    this.carShare.trips.push(trip);
-    this.dataStoreService.saveRecord(CarShare, this.carShare).subscribe((carShare: CarShare) => this.goBack());
+  }
+
+  updateForm(trip: Trip) {
+    this.trip = trip;
+    this.form.patchValue({
+      id: trip.id,
+      metres: trip.metres,
+      timestamp: trip.timestamp,
+      driver: trip.driver,
+      passengers: trip.passengers
+    })
+  }
+
+  onSubmit(form: FormGroup) {
+    // console.log(form);
+
+    this.dataStoreService.createRecord(Trip, {
+      carShare: this.carShare,
+      metres: 123, //form.get('metres').value,
+      timestamp: new Date(),//form.get('timestamp').value
+      // driver: new User(), //form.get('driver').value
+    }).save().subscribe(
+      (trip: Trip) => this.goBack(),
+      (errorResponse) => {
+        if (errorResponse instanceof ErrorResponse) {
+          // do something with errorResponse
+          console.log("ErrorResponse")
+          console.log(errorResponse.errors);
+        } else {
+          console.log("not error response");
+          console.log(errorResponse);
+          this.goBack()
+        }
+      }
+      );
   }
 
   addMember() {

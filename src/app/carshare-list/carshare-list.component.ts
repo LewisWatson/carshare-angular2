@@ -24,8 +24,10 @@ export class CarshareListComponent implements OnInit {
   }
 
   getCarShares(): void {
-    this.dataStoreService.query(CarShare, {}).subscribe(
-        (carShares: CarShare[]) => this.setCarShares(carShares)
+    this.dataStoreService.query(CarShare, {
+      include: 'trips'
+    }).subscribe(
+      (carShares: CarShare[]) => this.setCarShares(carShares)
     );
   }
 

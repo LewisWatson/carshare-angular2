@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router, Params }   from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -27,10 +27,16 @@ export class TripListComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle("Trips");
     this.route.params
-      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['id']))
-      .subscribe((carShare: CarShare) => this.carShare = carShare);
+      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['id'], {
+        include: 'trips'
+      }))
+      .subscribe((carShare: CarShare) => this.setCarShare(carShare));
   }
-  
+
+  setCarShare(carShare: CarShare) {
+    this.carShare = carShare;
+  }
+
   onSelect(trip: Trip): void {
     this.router.navigate(['/carshare', trip.carShare.id, 'trip', trip.id]);
   }

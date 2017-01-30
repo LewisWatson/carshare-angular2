@@ -11,7 +11,7 @@ import { Trip } from './trip';
   baseUrl: 'http://localhost:31415/v0/',
   models: {
     trips: Trip,
-    carshares: CarShare,
+    carShares: CarShare,
     users: User
   }
 })
