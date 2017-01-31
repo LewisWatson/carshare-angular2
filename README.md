@@ -3,6 +3,12 @@ An HTML5 front end client for the [carshare-back api].
 
 Designed to enable easy tracking of the distance members travel as passengers and as drivers. Car share members can make informed day to day decisions about who should drive next based on the ratio of distance travelled as the driver vs as a passenger.
 
+## Deploy
+
+1. ng build --prod --aot
+1. npm run precache
+1. firebase deploy
+
 ## License
 
 Copyright 2017 Lewis Watson
