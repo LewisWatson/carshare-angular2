@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
 import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
 import { DataStoreService } from '../data-store.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class CarshareDetailComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private carShareService: CarShareService,
     private titleService: Title, 
     public fb: FormBuilder, 
     private route: ActivatedRoute,
@@ -33,9 +31,21 @@ export class CarshareDetailComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Car Share');
+
     this.route.params
-      .switchMap((params: Params) => this.carShareService.getCarShare(params['id']))
-      .subscribe((carShare: CarShare) => this.updateForm(carShare));
+      .map(params => params['id'])
+      .subscribe(
+        id => this.loadCarShare(id),
+        err => console.log(`Something went wrong: ${err.message}`)
+    );
+  }
+
+  loadCarShare(id: string) {
+    if (id) {
+      this.route.params
+        .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, id))
+        .subscribe((carShare: CarShare) => this.carShare = carShare);
+    }
   }
 
   updateForm(carShare: CarShare) {

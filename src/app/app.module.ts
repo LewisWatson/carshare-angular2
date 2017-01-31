@@ -9,14 +9,7 @@ import { JsonApiModule } from 'angular2-jsonapi';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
-// Imports for loading & configuring the in-memory web api
-// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService }  from './in-memory-data.service';
-
 import { AppComponent } from './app.component';
-import { TripService } from './trip.service';
-import { CarShareService } from './car-share.service';
-import { UserService } from './user.service';
 import { DataStoreService} from './data-store.service';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -43,11 +36,10 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     ReactiveFormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
     JsonApiModule
   ],
-  providers: [CarShareService, TripService, UserService, DataStoreService],
+  providers: [DataStoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
