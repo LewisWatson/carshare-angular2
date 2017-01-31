@@ -3,11 +3,10 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
+import { ErrorResponse } from "angular2-jsonapi";
 import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
 import { User } from '../user';
-import { UserService } from '../user.service';
-import { TripService } from '../trip.service';
+import { DataStoreService } from '../data-store.service';
 import { Trip } from '../trip';
 
 @Component({
@@ -19,13 +18,10 @@ export class UserDetailComponent implements OnInit {
 
   user: User;
   trip: Trip;
-  carShare: CarShare;
   form: FormGroup;
 
   constructor(
-    private carShareService: CarShareService,
-    private tripService: TripService,
-    private userService: UserService,
+    private dataStoreService: DataStoreService,
     private titleService: Title, 
     public fb: FormBuilder, 
     private route: ActivatedRoute,
@@ -38,44 +34,67 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('User');
-    // this.route.params
-    //   .switchMap((params: Params) => this.carShareService.getCarShare(params['id']))
-    //   .subscribe((carShare: CarShare) => this.carShare = carShare);
-    // this.route.params
-    //   .switchMap((params: Params) => this.tripService.getTrip(params['tripId']))
-    //   .subscribe((trip: Trip) => this.trip = trip);
-    // this.route.params
-    //   .switchMap((params: Params) => this.userService.getUser(params['userId']))
-    //   .subscribe((user: User) => this.updateForm(user));
+    this.route.params
+      .switchMap((params: Params) => this.dataStoreService.findRecord(Trip, params['tripId'], {
+        include: 'carShares'
+      }))
+      .subscribe((trip: Trip) => this.trip = trip);
   }
 
-  updateForm(user: User) {
-    console.log("updating with user "+ JSON.stringify(user));
-    this.user = user;
-    this.form.patchValue({
-      id: user.id,
-      username: user.username
-    })
-  }
+  // updateForm(user: User) {
+  //   console.log("updating with user "+ JSON.stringify(user));
+  //   this.user = user;
+  //   this.form.patchValue({
+  //     id: user.id,
+  //     username: user.username
+  //   })
+  // }
 
   onSubmit(form: FormGroup) {
-    console.log(form);
-    var user: User;
-    user.username = form.get('username').value;
-    this.userService.create(user).then((user: User) => this.addUserToMembers(user));
+    this.dataStoreService.createRecord(User, {
+      username: form.get('username').value
+    }).save().subscribe(
+      (user: User) => this.addUserToMembers(user, this.trip),
+      (errorResponse) => {
+        if (errorResponse instanceof ErrorResponse) {
+          // do something with errorResponse
+          console.log("ErrorResponse")
+          console.log(errorResponse.errors);
+        } else {
+          console.log("not error response");
+          console.log(errorResponse);
+          this.goBack()
+        }
+      }
+    );
   }
 
-  addUserToMembers(user: User) {
-    this.carShare.members.push(user);
-    this.carShareService.update(this.carShare).then((carShare: CarShare) => this.addPassengerToTrip(user, carShare));
-  }
+  addUserToMembers(user: User, trip: Trip) {
+    console.log("add users to members");
+    if(!trip.carShare.members) {
+      trip.carShare.members = new Array();
+    }
+    trip.carShare.members.push(user);
 
-  addPassengerToTrip(passenger: User, carShare: CarShare) {
-    this.carShare = carShare;
-    this.trip.carShare = carShare;
-    this.trip.passengers.push(passenger);
-    this.tripService.update(this.trip).then(() => this.goBack());
-  }
+    if(!trip.passengers) {
+      trip.passengers = new Array();
+    }
+    trip.passengers.push(user);
+
+    this.trip.save().subscribe(
+      (trip: Trip) => this.goBack(),
+      (errorResponse) => {
+        if (errorResponse instanceof ErrorResponse) {
+          // do something with errorResponse
+          console.log("ErrorResponse")
+          console.log(errorResponse.errors);
+        } else {
+          console.log("not error response");
+          console.log(errorResponse);
+          this.goBack()
+        }
+      }
+    );}
 
   goBack(): void {
     this.location.back();
