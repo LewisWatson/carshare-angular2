@@ -88,8 +88,8 @@ export class TripDetailComponent implements OnInit {
 
     this.dataStoreService.createRecord(Trip, {
       carShare: this.carShare,
-      metres: 123, //form.get('metres').value,
-      timestamp: new Date(),//form.get('timestamp').value
+      metres: form.get('metres').value,
+      timestamp: form.get('timestamp').value
       // driver: new User(), //form.get('driver').value
     }).save().subscribe(
       (trip: Trip) => this.goBack(),
@@ -108,7 +108,7 @@ export class TripDetailComponent implements OnInit {
   }
 
   addMember() {
-    this.router.navigate(['/carshare', this.trip.carShare.id, 'trip', this.trip.id, 'passenger', 'new']);
+    this.router.navigate(['/carshare', this.carShare.id, 'trip', this.trip.id, 'passenger', 'new']);
   }
 
   goBack(): void {
