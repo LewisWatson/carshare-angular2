@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Web app manifest
 - Car Share List Component
 - Trip List Component
 - Trip Data Service
