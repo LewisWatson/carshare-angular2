@@ -41,6 +41,7 @@ export class TripListComponent implements OnInit {
   }
 
   onSelect(trip: Trip): void {
+    // this.router.navigate([trip.id], { relativeTo: this.route });
     this.router.navigate(['/carshare', this.carShare.id, 'trip', trip.id]);
   }
 

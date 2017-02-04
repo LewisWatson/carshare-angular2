@@ -25,6 +25,29 @@ import { CarshareListComponent } from './carshare-list/carshare-list.component';
 import { CarshareDetailComponent } from './carshare-detail/carshare-detail.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { LoginComponent } from './login/login.component';
+
+import { SignInComponent } from './auth/components/sign-in/sign-in.component';
+import { AuthGuardService } from './auth/guards/auth-guard.service';
+import { UnauthGuardService } from './auth/guards/unauth-guard.service';
+import { AuthService } from './auth/services/auth.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCf8me1ihwXzJU3GJTxI4TtF1uo_gfmStU",
+  authDomain: "ridesharelogger.firebaseapp.com",
+  databaseURL: "https://ridesharelogger.firebaseio.com",
+  storageBucket: "ridesharelogger.appspot.com",
+  messagingSenderId: "549212301269"
+};
+
+const firebaseAuthConfig = {
+  method: AuthMethods.Redirect,
+  remember: 'default'
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +56,10 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     TripDetailComponent,
     CarshareListComponent,
     CarshareDetailComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    LoginComponent,
+    SignInComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -41,9 +67,10 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     HttpModule,
     MaterialModule.forRoot(),
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     AppRoutingModule
   ],
-  providers: [CarShareService, TripService, UserService],
+  providers: [CarShareService, TripService, UserService, AuthService, AuthGuardService, UnauthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
