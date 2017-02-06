@@ -4,11 +4,11 @@ import { ActivatedRoute, Router, Params }   from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import { Trip } from '../trip';
-import { User } from '../user';
-import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
-import { TripService } from '../trip.service';
+import { Trip } from '../../trip';
+import { User } from '../../user';
+import { CarShare } from '../../car-share';
+import { CarShareService } from '../../car-share.service';
+import { TripService } from '../../trip.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -31,7 +31,7 @@ export class TripListComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle("Trips");
     this.route.params
-      .switchMap((params: Params) => this.carshareService.getCarShare(+params['id']))
+      .switchMap((params: Params) => this.carshareService.getCarShare(+params['carShareID']))
       .subscribe(carShare => this.carShare = carShare);
     this.getTrips();
   }

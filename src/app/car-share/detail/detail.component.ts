@@ -3,15 +3,15 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
+import { CarShare } from '../../car-share';
+import { CarShareService } from '../../car-share.service';
 
 @Component({
   selector: 'app-carshare-detail',
-  templateUrl: './carshare-detail.component.html',
-  styleUrls: ['./carshare-detail.component.css']
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.css']
 })
-export class CarshareDetailComponent implements OnInit {
+export class CarShareDetailComponent implements OnInit {
 
   carShare: CarShare;
   form: FormGroup;
