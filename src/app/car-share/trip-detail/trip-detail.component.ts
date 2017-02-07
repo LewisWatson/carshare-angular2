@@ -3,10 +3,10 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router }   from '@angular/router';
 import { Location }                 from '@angular/common';
-import { Trip } from '../trip';
-import { CarShare } from '../car-share';
-import { TripService } from '../trip.service';
-import { CarShareService } from '../car-share.service';
+import { Trip } from '../../trip';
+import { CarShare } from '../../car-share';
+import { TripService } from '../../trip.service';
+import { CarShareService } from '../../car-share.service';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -41,10 +41,10 @@ export class TripDetailComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle('Trip');
     this.route.params
-      .switchMap((params: Params) => this.tripService.getTrip(params['tripId']))
+      .switchMap((params: Params) => this.tripService.getTrip(params['tripID']))
       .subscribe((trip: Trip) => this.updateForm(trip));
     this.route.params
-      .switchMap((params: Params) => this.carShareService.getCarShare(params['id']))
+      .switchMap((params: Params) => this.carShareService.getCarShare(params['carShareID']))
       .subscribe((carShare: CarShare) => this.carShare = carShare);
   }
 

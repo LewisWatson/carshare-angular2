@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router }   from '@angular/router';
-import { CarShare } from '../car-share';
-import { CarShareService } from '../car-share.service';
+import { CarShare } from '../../car-share';
+import { CarShareService } from '../../car-share.service';
 
 @Component({
   selector: 'app-carshare-list',
-  templateUrl: './carshare-list.component.html',
-  styleUrls: ['./carshare-list.component.css']
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class CarshareListComponent implements OnInit {
+export class CarShareListComponent implements OnInit {
 
   carShares: CarShare[];
   
