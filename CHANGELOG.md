@@ -1,4 +1,5 @@
 # Change Log
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
@@ -8,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Anonymouse Firebase Authentication
 - Web app manifest
 - Car Share List Component
 - Trip List Component
