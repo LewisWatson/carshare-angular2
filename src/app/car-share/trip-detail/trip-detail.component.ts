@@ -5,10 +5,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ErrorResponse } from "angular2-jsonapi";
 
-import { Trip } from '../trip';
-import { User } from '../user';
-import { CarShare } from '../car-share';
-import { DataStoreService } from '../data-store.service';
+import { Trip } from '../../trip';
+import { User } from '../../user';
+import { CarShare } from '../../car-share';
+import { DataStoreService } from '../../data-store.service';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -43,11 +43,11 @@ export class TripDetailComponent implements OnInit {
     this.titleService.setTitle('Trip');
 
     this.route.params
-      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['id']))
+      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['carShareID']))
       .subscribe((carShare: CarShare) => this.carShare = carShare);
 
     this.route.params
-      .map(params => params['tripId'])
+      .map(params => params['tripID'])
       .subscribe(
         tripId => this.loadTrip(tripId),
         err => console.log(`Something went wrong: ${err.message}`)
@@ -57,7 +57,7 @@ export class TripDetailComponent implements OnInit {
   loadTrip(tripId: string) {
     if (tripId) {
       this.route.params
-        .switchMap((params: Params) => this.dataStoreService.findRecord(Trip, params['tripId']))
+        .switchMap((params: Params) => this.dataStoreService.findRecord(Trip, params['tripID']))
         .subscribe((trip: Trip) => this.updateForm(trip));
     }
   }

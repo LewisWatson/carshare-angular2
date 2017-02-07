@@ -4,10 +4,10 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import { Trip } from '../trip';
-import { User } from '../user';
-import { CarShare } from '../car-share';
-import { DataStoreService } from '../data-store.service';
+import { Trip } from '../../trip';
+import { User } from '../../user';
+import { CarShare } from '../../car-share';
+import { DataStoreService } from '../../data-store.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -27,7 +27,7 @@ export class TripListComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle("Trips");
     this.route.params
-      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['id'], {
+      .switchMap((params: Params) => this.dataStoreService.findRecord(CarShare, params['carShareID'], {
         include: 'trips'
       }))
       .subscribe((carShare: CarShare) => this.setCarShare(carShare));
@@ -38,7 +38,8 @@ export class TripListComponent implements OnInit {
   }
 
   onSelect(trip: Trip): void {
-    this.router.navigate(['/carshare', trip.carShare.id, 'trip', trip.id]);
+    // this.router.navigate([trip.id], { relativeTo: this.route });
+    this.router.navigate(['/carshare', this.carShare.id, 'trip', trip.id]);
   }
 
   newTrip() {

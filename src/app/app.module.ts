@@ -7,39 +7,57 @@ import { MaterialModule } from '@angular/material';
 
 import { JsonApiModule } from 'angular2-jsonapi';
 
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DataStoreService} from './data-store.service';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { TripListComponent } from './trip-list/trip-list.component';
-import { TripDetailComponent } from './trip-detail/trip-detail.component';
 
 import 'hammerjs';
-import { CarshareListComponent } from './carshare-list/carshare-list.component';
-import { CarshareDetailComponent } from './carshare-detail/carshare-detail.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+
+import { AuthService } from './auth/services/auth.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { CarShareModule } from './car-share/car-share.module';
+import { AuthModule } from './auth/auth.module';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCf8me1ihwXzJU3GJTxI4TtF1uo_gfmStU",
+  authDomain: "ridesharelogger.com",
+  databaseURL: "https://ridesharelogger.firebaseio.com",
+  storageBucket: "ridesharelogger.appspot.com",
+  messagingSenderId: "549212301269"
+};
+
+const firebaseAuthConfig = {
+  method: AuthMethods.Redirect,
+  remember: 'default'
+};
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    TripListComponent,
-    TripDetailComponent,
-    CarshareListComponent,
-    CarshareDetailComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
+    JsonApiModule,
     MaterialModule.forRoot(),
-    AppRoutingModule,
-    JsonApiModule
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+    AuthModule,
+    CarShareModule,
+    AppRoutingModule
   ],
-  providers: [DataStoreService],
+  providers: [DataStoreService, AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
