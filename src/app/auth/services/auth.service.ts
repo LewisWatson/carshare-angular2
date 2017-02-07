@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthProviders, AuthMethods, AngularFire, FirebaseAuthState } from 'angularfire2';
 
 
@@ -6,7 +7,10 @@ import { AuthProviders, AuthMethods, AngularFire, FirebaseAuthState } from 'angu
 export class AuthService {
   private authState: FirebaseAuthState = null;
 
-  constructor(public af: AngularFire) {
+  // store the URL so we can redirect after logging in
+  redirectUrl: string;
+
+  constructor(public af: AngularFire, private router: Router) {
     af.auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
     });
@@ -21,7 +25,7 @@ export class AuthService {
   }
 
   signIn(provider: number): firebase.Promise<FirebaseAuthState> {
-    return this.af.auth.login({provider})
+    return this.af.auth.login({ provider })
       .catch(error => console.log('ERROR @ AuthService#signIn() :', error));
   }
 
@@ -50,6 +54,9 @@ export class AuthService {
   }
 
   signOut(): void {
-    this.af.auth.logout();
+    this.af.auth.logout().then(
+      () => this.router.navigate(['/login'])
+    )
+      .catch(error => console.log('ERROR @ AuthService#signOut() :', error));
   }
 }

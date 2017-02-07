@@ -5,7 +5,7 @@ import { SignInComponent } from './auth/components/sign-in/sign-in.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', component: SignInComponent, canActivate: [UnauthGuard]},
+  { path: '',   redirectTo: '/carshares', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

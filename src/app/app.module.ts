@@ -23,16 +23,12 @@ import 'hammerjs';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
-import { LoginComponent } from './login/login.component';
 
-import { SignInComponent } from './auth/components/sign-in/sign-in.component';
 import { AuthService } from './auth/services/auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { CarShareModule } from './car-share/car-share.module';
-
-import { AuthGuard } from './auth/guards/auth-guard.service';
-import { UnauthGuard } from './auth/guards/unauth-guard.service';
+import { AuthModule } from './auth/auth.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCf8me1ihwXzJU3GJTxI4TtF1uo_gfmStU",
@@ -53,8 +49,6 @@ const firebaseAuthConfig = {
     AppComponent,
     ToolbarComponent,
     UserDetailComponent,
-    LoginComponent,
-    SignInComponent,
     PageNotFoundComponent
   ],
   imports: [
@@ -64,15 +58,16 @@ const firebaseAuthConfig = {
     MaterialModule.forRoot(),
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+    AuthModule,
     CarShareModule,
     AppRoutingModule
   ],
-  providers: [CarShareService, TripService, UserService, AuthService, AuthGuard, UnauthGuard],
+  providers: [CarShareService, TripService, UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   // Diagnostic only: inspect router configuration
   constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    // console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
   }
 }
