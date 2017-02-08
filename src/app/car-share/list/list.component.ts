@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Headers } from '@angular/http';
 import { ActivatedRoute, Router }   from '@angular/router';
 import { CarShare } from '../../car-share';
 import { DataStoreService } from '../../data-store.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-carshare-list',
@@ -16,7 +18,8 @@ export class CarShareListComponent implements OnInit {
   constructor(
     private titleService: Title,
     private router: Router,
-    private dataStoreService: DataStoreService) { }
+    private dataStoreService: DataStoreService,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.getCarShares();

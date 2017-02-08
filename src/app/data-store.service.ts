@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { JsonApiDatastoreConfig, JsonApiDatastore } from 'angular2-jsonapi';
 
 import { User } from './user';
@@ -17,8 +17,13 @@ import { Trip } from './trip';
 })
 export class DataStoreService extends JsonApiDatastore {
 
-    constructor(http: Http) {
-        super(http);
-    }
+  constructor(http: Http) {
+    super(http);
+    this.updateAuthToken();
+  }
+
+  updateAuthToken() {
+    this.headers = new Headers({ 'Authorization': localStorage.getItem("authToken") });
+  }
 
 }

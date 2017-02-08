@@ -17,7 +17,6 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle("Sign In");
-    this.postSignIn();
   }
 
   signInAnonymously(): void {
@@ -48,6 +47,7 @@ export class SignInComponent implements OnInit {
   private postSignIn(): void {
 
     if (this.auth.authenticated) {
+
       // Get the redirect URL from our auth service
       // If no redirect has been set, use the default
       let redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/carshares';
