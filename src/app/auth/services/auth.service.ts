@@ -14,17 +14,19 @@ export class AuthService {
   constructor(public af: AngularFire, private router: Router, private dataStore: DataStoreService) {
     af.auth.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
-      state.auth.getToken().then(
-        function(token) {
-          console.log("token "+token);
-          localStorage.setItem("authToken", token);
-          this.dataStore.updateAuthToken();
-        }.bind(this)
-      ).catch(
-        function(error) {
-          console.log(error);
-        }
-      );
+      if (state) {
+        state.auth.getToken().then(
+          function (token) {
+            console.log("token " + token);
+            localStorage.setItem("authToken", token);
+            this.dataStore.updateAuthToken();
+          }.bind(this)
+        ).catch(
+          function (error) {
+            console.log(error);
+          }
+          );
+      }
     });
   }
 
@@ -42,7 +44,7 @@ export class AuthService {
   }
 
   signInAnonymously(): firebase.Promise<FirebaseAuthState> {
-    
+
     var promise = this.af.auth.login({
       provider: AuthProviders.Anonymous,
       method: AuthMethods.Anonymous
