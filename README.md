@@ -1,4 +1,5 @@
 # Car Share Angular 2
+[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/LewisWatson/carshare-ninja-pitch/master?grs=github&t=white)
 
 [Progressive Web App] for the [carshare-back api].
 
