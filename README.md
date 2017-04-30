@@ -1,6 +1,8 @@
 # Car Share Angular 2
 [![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/LewisWatson/carshare-ninja-pitch/master?grs=github&t=white)
 
+***Please note that development has moved to [LewisWatson/carshare-web](https://github.com/LewisWatson/carshare-web)***
+
 [Progressive Web App] for the [carshare-back api].
 
 Easily track the distance car share members travel as passengers and as drivers. Members can make informed decisions about who should drive based on the ratio of miles as passenger/driver.
